@@ -1,8 +1,13 @@
-<div class="header">
-  <div>
-    <a routerLink="">Product List</a>
+<nav class="header">
+  <!--  Title start -->
+  <div class="text-2xl">
+    {{title}}
   </div>
-  <div>
-    <a routerLink="cart">Cart</a>
+  <!--  Title end -->
+  <!--  List start  -->
+  <div class="mx-auto divide-x-2 px-2">
+    <a class="px-2" routerLink="/">Product List</a>
+    <a class="px-2" routerLink="/cart">Cart</a>
   </div>
-</div>
+  <!--  List end  -->
+</nav>
