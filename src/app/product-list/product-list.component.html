@@ -1,9 +1,11 @@
 <div class="mx-auto columns-3 px-3 py-2">
   <!--  Product list start  -->
-  <div *ngFor="let product of products" class="border shadow m-1">
-    <img ngSrc="{{product.url}}" alt="The preview image of product &quot;{{product.name}}&quot;" width="100" height="100">
-    <div>{{product.name}}</div>
-    <div>{{product.price}}</div>
+  <div *ngFor="let product of products" class="border shadow-md m-1 rounded overflow-hidden">
+    <img ngSrc="{{product.url}}" alt="The preview image of product &quot;{{product.name}}&quot;" height="100" width="200" class="w-full h-72 object-cover">
+    <div class="m-4">
+      <span class="block text-2xl">{{product.name}}</span>
+      <span class="block text-lg font-semibold">${{product.price}}</span>
+    </div>
   </div>
   <!--  Product list end  -->
 </div>
