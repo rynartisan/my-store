@@ -8,4 +8,5 @@ import {Product} from "../model/product";
 })
 export class ProductItemComponent {
   @Input() product: Product = {description: "", id: 0, name: "", price: 0, url: ""};
+  quantity: number = 1;
 }
