@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {faShoppingCart} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-header',
@@ -8,4 +9,5 @@ import {Component} from '@angular/core';
 export class HeaderComponent {
   title: string = 'My Store';
 
+  protected readonly faShoppingCart = faShoppingCart;
 }

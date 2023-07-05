@@ -11,6 +11,7 @@ import {ProductListComponent} from './product-list/product-list.component';
 import {HeaderComponent} from './core/header/header.component';
 import {HttpClientModule} from "@angular/common/http";
 import {NgOptimizedImage} from "@angular/common";
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {NgOptimizedImage} from "@angular/common";
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
