@@ -1,38 +1,52 @@
 <!--  Cart component start  -->
-<div class="grid grid-cols-2">
-  <!--  Cart product list start  -->
-  <div>
-    <!--  Component title start  -->
-    <div>
-      <h1>My Cart</h1>
+<div class="px-96 py-2">
+  <!--  Empty cart message start  -->
+  <div class="grid grid-cols-1 justify-items-center mt-72" *ngIf="orderProducts.length === 0">
+    <div class="">
+      <fa-icon [icon]="faShoppingCart" class="text-9xl"></fa-icon>
     </div>
-    <!--  Component title end  -->
-    <!--  Empty cart message start  -->
-    <div *ngIf="orderProducts.length === 0">
+    <div class="text-4xl text-gray-500">
       Your cart is empty!
     </div>
-    <!--  Empty cart message end  -->
-    <div class="grid grid-cols-2" *ngFor="let orderProduct of orderProducts">
-      <!--  Product thumbnail start -->
-      <div>
-        <img class="" ngSrc="{{orderProduct.product.url}}"
-             alt="The preview image of product &quot;{{orderProduct.product.name}}&quot;" height="100" width="200">
-      </div>
-      <!--  Product thumbnail end -->
-      <!--  Product details start -->
-      <div>
-        <span class="font-bold">{{orderProduct.product.name}}</span>
-        <span>${{orderProduct.product.price}}</span>
-        <span>{{orderProduct.quantity}}</span>
-      </div>
-      <!--  Product details end -->
+    <div class="">
+      Feel free to visit our <a class="text-blue-600" routerLink="/">list of products</a>.
     </div>
   </div>
-  <!--  Cart product list end  -->
-  <!--  Customer info section start  -->
-  <div>
-    Customer info
+  <!--  Empty cart message end  -->
+  <!--  Non-empty cart component start  -->
+  <div class="mt-12" *ngIf="orderProducts.length !==0">
+    <div class="grid grid-cols-2">
+      <!--  Cart product list start  -->
+      <div>
+        <!--  Component title start  -->
+        <div class="text-6xl uppercase">
+          <h1>My Cart</h1>
+        </div>
+        <!--  Component title end  -->
+        <div class="grid grid-cols-2" *ngFor="let orderProduct of orderProducts">
+          <!--  Product thumbnail start -->
+          <div>
+            <img class="" ngSrc="{{orderProduct.product.url}}"
+                 alt="The preview image of product &quot;{{orderProduct.product.name}}&quot;" height="100" width="200">
+          </div>
+          <!--  Product thumbnail end -->
+          <!--  Product details start -->
+          <div>
+            <span class="font-bold">{{orderProduct.product.name}}</span>
+            <span>${{orderProduct.product.price}}</span>
+            <span>{{orderProduct.quantity}}</span>
+          </div>
+          <!--  Product details end -->
+        </div>
+      </div>
+      <!--  Cart product list end  -->
+      <!--  Customer info section start  -->
+      <div class="mt-7">
+        Customer info
+      </div>
+      <!--  Customer info section start  -->
+    </div>
   </div>
-  <!--  Customer info section start  -->
+  <!--  Non-empty cart component end  -->
 </div>
 <!--  Cart component end  -->

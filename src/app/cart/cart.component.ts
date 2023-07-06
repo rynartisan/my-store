@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CartProduct} from "../model/cart.product";
 import {CartService} from "../service/cart.service";
+import {faShoppingCart} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-cart',
@@ -23,4 +24,6 @@ export class CartComponent implements OnInit {
       .getCartProducts()
       .subscribe(value => this.orderProducts = value);
   }
+
+  protected readonly faShoppingCart = faShoppingCart;
 }
