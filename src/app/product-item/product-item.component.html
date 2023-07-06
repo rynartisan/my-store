@@ -12,8 +12,8 @@
         <option *ngFor="let q of quantities" [value]="q">{{q}}</option>
       </select>
       <button class="text-teal-900 text-sm bg-white rounded-full border border-teal-900 mx-1 p-3" (click)="addToCart()">
-        <fa-icon [icon]="faShoppingCart"></fa-icon>
-        Add to Cart
+        <fa-icon [icon]="buttonIcon"></fa-icon>
+        {{buttonLabel}}
       </button>
     </div>
   </div>
