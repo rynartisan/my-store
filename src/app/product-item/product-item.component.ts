@@ -12,8 +12,9 @@ import {CartProduct} from "../model/cart.product";
 export class ProductItemComponent {
   @Input() product: Product = {description: "", id: 0, name: "", price: 0, url: ""};
   quantity: number = 1;
+  quantities: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   protected readonly faShoppingCart = faShoppingCart;
-   quantities: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  protected readonly parseInt = parseInt;
 
   constructor(private cartService: CartService) {
   }
@@ -25,5 +26,11 @@ export class ProductItemComponent {
     this.cartService.addCartProduct(cartProduct);
     // Reset the quantity to original.
     this.quantity = 1;
+  }
+
+  // I had to add this since for some reason NgModel treats input fields as string by default and concatenates numbers instead of adding them.
+  // More on the problem: https://stackoverflow.com/questions/37921596/option-tag-returning-string-value-instead-of-number-for-ngmodel-in-angular
+  onChangeSelection($event: any) {
+    this.quantity = parseInt($event);
   }
 }

@@ -21,9 +21,23 @@ export class CartService {
     // Get current values.
     const cartProducts: CartProduct[] = this.behaviorSubject
       .getValue();
-    // Push new value.
-    cartProducts.push(cartProduct);
+    //Find if the product is already added, if so just update the quantity.
+    if (cartProducts.some(value => {
+      return value.product === cartProduct.product
+    })) {
+      // Update the quantity
+      const existingProduct: CartProduct = cartProducts.find(value => {
+        return value.product === cartProduct.product
+      }) as CartProduct;
+      existingProduct.quantity += cartProduct.quantity;
+      cartProducts[cartProducts.indexOf(existingProduct)] = existingProduct;
+    } else {
+      // Push new value.
+      cartProducts.push(cartProduct);
+    }
     // Publish to subscribers.
+    console.log(`New cart: ${JSON.stringify(cartProducts)}`);
+
     this.behaviorSubject
       .next(cartProducts);
   }

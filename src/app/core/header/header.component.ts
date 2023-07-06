@@ -24,9 +24,10 @@ export class HeaderComponent implements OnInit {
     this.cartService
       .getCartProducts()
       .subscribe(value => {
-        this.cartProductCount = value
-          .map(value1 => value1.quantity)
-          .reduce((previousValue, currentValue) => currentValue + previousValue);
+        if (value.length !== 0)
+          this.cartProductCount = value
+            .map(value1 => value1.quantity)
+            .reduce((previousValue:number, currentValue:number) =>Math.abs(currentValue)  + Math.abs(previousValue));
       });
   }
 }
