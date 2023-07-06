@@ -13,6 +13,7 @@ export class ProductItemComponent {
   @Input() product: Product = {description: "", id: 0, name: "", price: 0, url: ""};
   quantity: number = 1;
   protected readonly faShoppingCart = faShoppingCart;
+   quantities: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   constructor(private cartService: CartService) {
   }

@@ -12,6 +12,7 @@ import {HeaderComponent} from './core/header/header.component';
 import {HttpClientModule} from "@angular/common/http";
 import {NgOptimizedImage} from "@angular/common";
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     AppRoutingModule,
     HttpClientModule,
     NgOptimizedImage,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
