@@ -1,1 +1,38 @@
-<p>cart works!</p>
+<!--  Cart component start  -->
+<div class="grid grid-cols-2">
+  <!--  Cart product list start  -->
+  <div>
+    <!--  Component title start  -->
+    <div>
+      <h1>My Cart</h1>
+    </div>
+    <!--  Component title end  -->
+    <!--  Empty cart message start  -->
+    <div *ngIf="orderProducts.length === 0">
+      Your cart is empty!
+    </div>
+    <!--  Empty cart message end  -->
+    <div class="grid grid-cols-2" *ngFor="let orderProduct of orderProducts">
+      <!--  Product thumbnail start -->
+      <div>
+        <img class="" ngSrc="{{orderProduct.product.url}}"
+             alt="The preview image of product &quot;{{orderProduct.product.name}}&quot;" height="100" width="200">
+      </div>
+      <!--  Product thumbnail end -->
+      <!--  Product details start -->
+      <div>
+        <span class="font-bold">{{orderProduct.product.name}}</span>
+        <span>${{orderProduct.product.price}}</span>
+        <span>{{orderProduct.quantity}}</span>
+      </div>
+      <!--  Product details end -->
+    </div>
+  </div>
+  <!--  Cart product list end  -->
+  <!--  Customer info section start  -->
+  <div>
+    Customer info
+  </div>
+  <!--  Customer info section start  -->
+</div>
+<!--  Cart component end  -->
