@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {CartProduct} from "../model/cart.product";
 import {CartService} from "../service/cart.service";
-import {faShoppingCart} from "@fortawesome/free-solid-svg-icons";
+import {faShoppingCart, faTrashCan} from "@fortawesome/free-solid-svg-icons";
+import {ProductService} from "../service/product.service";
 
 @Component({
   selector: 'app-cart',
@@ -11,11 +12,23 @@ import {faShoppingCart} from "@fortawesome/free-solid-svg-icons";
 export class CartComponent implements OnInit {
   orderProducts: CartProduct[] = [];
 
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartService, private productService: ProductService) {
   }
 
   ngOnInit(): void {
     this.initializeCartProducts();
+    this.addDummyProduct();
+  }
+
+  private addDummyProduct() {
+    this.productService
+      .getProducts()
+      .subscribe(value => {
+        if (this.orderProducts.length === 0){
+          this.cartService.addCartProduct({product: value[0], quantity: 2})
+          this.cartService.addCartProduct({product: value[1], quantity: 2})
+        }
+      });
   }
 
   private initializeCartProducts() {
@@ -26,4 +39,5 @@ export class CartComponent implements OnInit {
   }
 
   protected readonly faShoppingCart = faShoppingCart;
+  protected readonly faTrashCan = faTrashCan;
 }

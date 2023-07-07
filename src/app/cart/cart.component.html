@@ -5,39 +5,65 @@
     <div class="">
       <fa-icon [icon]="faShoppingCart" class="text-9xl"></fa-icon>
     </div>
-    <div class="text-4xl text-gray-500">
-      Your cart is empty!
+    <div class="text-2xl mt-4 text-gray-400">
+      Your cart is empty :(
     </div>
-    <div class="">
-      Feel free to visit our <a class="text-blue-600" routerLink="/">list of products</a>.
+    <div>
+      <button class="bg-gradient-to-br from-teal-600 to-teal-700 py-2 px-6 mt-8 text-white rounded-3xl" routerLink="/">
+        Continue Shopping
+      </button>
     </div>
   </div>
   <!--  Empty cart message end  -->
   <!--  Non-empty cart component start  -->
   <div class="mt-12" *ngIf="orderProducts.length !==0">
-    <div class="grid grid-cols-2">
+    <div class="grid grid-cols-3">
       <!--  Cart product list start  -->
-      <div>
+      <div class="col-span-2">
         <!--  Component title start  -->
-        <div class="text-6xl uppercase">
+        <div class="text-4xl uppercase">
           <h1>My Cart</h1>
         </div>
         <!--  Component title end  -->
-        <div class="grid grid-cols-2" *ngFor="let orderProduct of orderProducts">
-          <!--  Product thumbnail start -->
-          <div>
-            <img class="" ngSrc="{{orderProduct.product.url}}"
-                 alt="The preview image of product &quot;{{orderProduct.product.name}}&quot;" height="100" width="200">
+        <!--  Product table start -->
+        <div class="mt-6">
+          <div class="grid grid-cols-5 mb-2">
+            <span></span>
+            <span class="px-3">Name</span>
+            <span class="px-3">Price</span>
+            <span class="px-3 col-span-2">Quantity</span>
           </div>
-          <!--  Product thumbnail end -->
-          <!--  Product details start -->
-          <div>
-            <span class="font-bold">{{orderProduct.product.name}}</span>
-            <span>${{orderProduct.product.price}}</span>
-            <span>{{orderProduct.quantity}}</span>
+          <div class="grid grid-cols-5 rounded border-t-2 py-3" *ngFor="let orderProduct of orderProducts">
+            <!--  Product thumbnail start -->
+            <div>
+              <img class="h-48 w-32 rounded" ngSrc="{{orderProduct.product.url}}"
+                   alt="The preview image of product &quot;{{orderProduct.product.name}}&quot;" height="100"
+                   width="200">
+            </div>
+            <!--  Product thumbnail end -->
+            <!--  Product details start -->
+            <div class="p-3">
+              <span>{{orderProduct.product.name}}</span>
+            </div>
+            <div class="p-3">
+              <span>${{orderProduct.product.price}}</span>
+            </div>
+            <div class="p-3">
+              <span>{{orderProduct.quantity}}</span>
+            </div>
+            <div class="p-3">
+              <fa-icon [icon]="faTrashCan"></fa-icon>
+            </div>
+            <!--  Product details end -->
           </div>
-          <!--  Product details end -->
+          <!--  Cart total start  -->
+          <div class="grid grid-cols-2 pt-6 border-t-2 justify-items-end">
+            <span class="text-2xl font-bold">Total</span>
+            <span class="text-2xl">$9999</span>
+          </div>
+          <!--  Cart total end  -->
         </div>
+        <!--  Product table end -->
       </div>
       <!--  Cart product list end  -->
       <!--  Customer info section start  -->

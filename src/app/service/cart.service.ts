@@ -35,9 +35,8 @@ export class CartService {
       // Push new value.
       cartProducts.push(cartProduct);
     }
-    // Publish to subscribers.
-    console.log(`New cart: ${JSON.stringify(cartProducts)}`);
 
+    // Publish to subscribers.
     this.behaviorSubject
       .next(cartProducts);
   }
