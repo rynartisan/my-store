@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CartProduct} from "../model/cart.product";
 import {CartService} from "../service/cart.service";
-import {faShoppingCart, faTrashCan} from "@fortawesome/free-solid-svg-icons";
+import {faMinus, faPlus, faShoppingCart, faTrashCan} from "@fortawesome/free-solid-svg-icons";
 import {Cart} from "../model/cart";
 
 @Component({
@@ -14,6 +14,8 @@ export class CartComponent implements OnInit {
   customerInfo: CustomerInformation = {creditCardNumber: "", firstName: "", lastName: "", shippingAddress: ""};
   protected readonly faShoppingCart = faShoppingCart;
   protected readonly faTrashCan = faTrashCan;
+  protected readonly faMinus = faMinus;
+  protected readonly faPlus = faPlus;
 
   constructor(private cartService: CartService) {
   }
@@ -26,8 +28,16 @@ export class CartComponent implements OnInit {
     // TODO: Implement method.
   }
 
-  removeCartProduct(cartProduct: CartProduct) {
+  removeCartProduct(cartProduct: CartProduct) :void{
     this.cartService.removeCartProduct(cartProduct);
+  }
+
+  updateQuantity(cartProduct: CartProduct, quantity: number):void {
+    cartProduct.quantity += quantity;
+    if (cartProduct.quantity === 0)
+      this.cartService.removeCartProduct(cartProduct);
+    else
+      this.cartService.updateCartProduct(cartProduct);
   }
 
   private initializeCartProducts(): void {
