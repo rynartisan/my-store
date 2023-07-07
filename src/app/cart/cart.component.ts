@@ -11,6 +11,9 @@ import {ProductService} from "../service/product.service";
 })
 export class CartComponent implements OnInit {
   orderProducts: CartProduct[] = [];
+  customerInfo: CustomerInformation = {creditCardNumber: "", firstName: "", lastName: "", shippingAddress: ""};
+  protected readonly faShoppingCart = faShoppingCart;
+  protected readonly faTrashCan = faTrashCan;
 
   constructor(private cartService: CartService, private productService: ProductService) {
   }
@@ -20,24 +23,32 @@ export class CartComponent implements OnInit {
     this.addDummyProduct();
   }
 
-  private addDummyProduct() {
+  submitForm(): void {
+    // TODO: Implement method.
+  }
+
+  private addDummyProduct(): void {
     this.productService
       .getProducts()
       .subscribe(value => {
-        if (this.orderProducts.length === 0){
+        if (this.orderProducts.length === 0) {
           this.cartService.addCartProduct({product: value[0], quantity: 2})
           this.cartService.addCartProduct({product: value[1], quantity: 2})
         }
       });
   }
 
-  private initializeCartProducts() {
+  private initializeCartProducts(): void {
     this
       .cartService
       .getCartProducts()
       .subscribe(value => this.orderProducts = value);
   }
+}
 
-  protected readonly faShoppingCart = faShoppingCart;
-  protected readonly faTrashCan = faTrashCan;
+interface CustomerInformation {
+  firstName: string,
+  lastName: string,
+  shippingAddress: string,
+  creditCardNumber: string
 }

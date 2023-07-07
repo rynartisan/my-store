@@ -1,5 +1,5 @@
 <!--  Cart component start  -->
-<div class="px-96 py-2">
+<div class="px-80 py-2">
   <!--  Empty cart message start  -->
   <div class="grid grid-cols-1 justify-items-center mt-72" *ngIf="orderProducts.length === 0">
     <div class="">
@@ -17,12 +17,12 @@
   <!--  Empty cart message end  -->
   <!--  Non-empty cart component start  -->
   <div class="mt-12" *ngIf="orderProducts.length !==0">
-    <div class="grid grid-cols-3">
+    <div class="grid grid-cols-5">
       <!--  Cart product list start  -->
-      <div class="col-span-2">
+      <div class="col-span-3">
         <!--  Component title start  -->
         <div class="text-4xl uppercase">
-          <h1>My Cart</h1>
+          <span>My Cart</span>
         </div>
         <!--  Component title end  -->
         <!--  Product table start -->
@@ -36,7 +36,7 @@
           <div class="grid grid-cols-5 rounded border-t-2 py-3" *ngFor="let orderProduct of orderProducts">
             <!--  Product thumbnail start -->
             <div>
-              <img class="h-48 w-32 rounded" ngSrc="{{orderProduct.product.url}}"
+              <img class="h-36 w-24 shadow rounded" ngSrc="{{orderProduct.product.url}}"
                    alt="The preview image of product &quot;{{orderProduct.product.name}}&quot;" height="100"
                    width="200">
             </div>
@@ -58,8 +58,8 @@
           </div>
           <!--  Cart total start  -->
           <div class="grid grid-cols-2 pt-6 border-t-2 justify-items-end">
-            <span class="text-2xl font-bold">Total</span>
-            <span class="text-2xl">$9999</span>
+            <span class="text-lg font-bold">Total</span>
+            <span class="text-lg">$9999</span>
           </div>
           <!--  Cart total end  -->
         </div>
@@ -67,8 +67,37 @@
       </div>
       <!--  Cart product list end  -->
       <!--  Customer info section start  -->
-      <div class="mt-7">
-        Customer info
+      <div class="col-span-2 ml-4">
+        <div class="text-4xl uppercase">
+          <span>Customer Info</span>
+        </div>
+        <!--  Customer information form start -->
+        <div class="px-1 mt-6">
+          <form (ngSubmit)="submitForm()" class="grid grid-cols-2">
+            <div class="grid grid-cols-1 px-1 my-2">
+              <label class="mb-1" for="first_name">First Name</label>
+              <input class="rounded p-1" placeholder="Jane" type="text" name="first_name" id="first_name" [(ngModel)]="customerInfo.firstName">
+            </div>
+            <div class="grid grid-cols-1 px-1 my-2">
+              <label class="mb-1" for="last_name">Last Name</label>
+              <input class="rounded p-1" placeholder="Roe" type="text" name="last_name" id="last_name" [(ngModel)]="customerInfo.lastName">
+            </div>
+            <div class="grid grid-cols-1 px-1 my-2 col-span-2">
+              <label class="mb-1" for="shipping_address">Shipping Address</label>
+              <input class="rounded p-1" placeholder="Planet Earth" type="text" name="shipping_address" id="shipping_address"
+                     [(ngModel)]="customerInfo.shippingAddress">
+            </div>
+            <div class="grid grid-cols-1 px-1 my-2 col-span-2">
+              <label class="mb-1" for="credit_card_number">Credit Card Number</label>
+              <input class="rounded p-1" placeholder="0000 0000 0000 0000" type="text" name="credit_card_number" id="credit_card_number"
+                     [(ngModel)]="customerInfo.creditCardNumber">
+            </div>
+            <div class="col-span-2 text-right my-2">
+              <button class="bg-gradient-to-br from-teal-600 to-teal-700 py-2 px-6 text-white rounded-3xl" type="submit">Submit Order</button>
+            </div>
+          </form>
+        </div>
+        <!--  Customer information form end -->
       </div>
       <!--  Customer info section start  -->
     </div>
