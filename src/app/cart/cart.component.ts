@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CartProduct} from "../model/cart.product";
 import {CartService} from "../service/cart.service";
 import {faShoppingCart, faTrashCan} from "@fortawesome/free-solid-svg-icons";
-import {ProductService} from "../service/product.service";
+import {Cart} from "../model/cart";
 
 @Component({
   selector: 'app-cart',
@@ -10,39 +10,31 @@ import {ProductService} from "../service/product.service";
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  orderProducts: CartProduct[] = [];
+  cart: Cart = new Cart();
   customerInfo: CustomerInformation = {creditCardNumber: "", firstName: "", lastName: "", shippingAddress: ""};
   protected readonly faShoppingCart = faShoppingCart;
   protected readonly faTrashCan = faTrashCan;
 
-  constructor(private cartService: CartService, private productService: ProductService) {
+  constructor(private cartService: CartService) {
   }
 
   ngOnInit(): void {
     this.initializeCartProducts();
-    this.addDummyProduct();
   }
 
   submitForm(): void {
     // TODO: Implement method.
   }
 
-  private addDummyProduct(): void {
-    this.productService
-      .getProducts()
-      .subscribe(value => {
-        if (this.orderProducts.length === 0) {
-          this.cartService.addCartProduct({product: value[0], quantity: 2})
-          this.cartService.addCartProduct({product: value[1], quantity: 2})
-        }
-      });
+  removeCartProduct(cartProduct: CartProduct) {
+    this.cartService.removeCartProduct(cartProduct);
   }
 
   private initializeCartProducts(): void {
     this
       .cartService
-      .getCartProducts()
-      .subscribe(value => this.orderProducts = value);
+      .getCart()
+      .subscribe(value => this.cart = value);
   }
 }
 

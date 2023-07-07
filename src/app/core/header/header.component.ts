@@ -22,12 +22,9 @@ export class HeaderComponent implements OnInit {
 
   private updateProductCount(): void {
     this.cartService
-      .getCartProducts()
+      .getCart()
       .subscribe(value => {
-        if (value.length !== 0)
-          this.cartProductCount = value
-            .map(value1 => value1.quantity)
-            .reduce((previousValue:number, currentValue:number) =>Math.abs(currentValue)  + Math.abs(previousValue));
+        this.cartProductCount = value.getProductCount();
       });
   }
 }

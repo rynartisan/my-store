@@ -1,7 +1,7 @@
 <!--  Cart component start  -->
 <div class="px-80 py-2">
   <!--  Empty cart message start  -->
-  <div class="grid grid-cols-1 justify-items-center mt-72" *ngIf="orderProducts.length === 0">
+  <div class="grid grid-cols-1 justify-items-center mt-72" *ngIf="cart.isEmpty()">
     <div class="">
       <fa-icon [icon]="faShoppingCart" class="text-9xl"></fa-icon>
     </div>
@@ -16,7 +16,7 @@
   </div>
   <!--  Empty cart message end  -->
   <!--  Non-empty cart component start  -->
-  <div class="mt-12" *ngIf="orderProducts.length !==0">
+  <div class="mt-12" *ngIf="!cart.isEmpty()">
     <div class="grid grid-cols-5">
       <!--  Cart product list start  -->
       <div class="col-span-3">
@@ -33,33 +33,33 @@
             <span class="px-3">Price</span>
             <span class="px-3 col-span-2">Quantity</span>
           </div>
-          <div class="grid grid-cols-5 rounded border-t-2 py-3" *ngFor="let orderProduct of orderProducts">
+          <div class="grid grid-cols-5 rounded border-t-2 py-3" *ngFor="let cartProduct of cart.cartProducts">
             <!--  Product thumbnail start -->
             <div>
-              <img class="h-36 w-24 shadow rounded" ngSrc="{{orderProduct.product.url}}"
-                   alt="The preview image of product &quot;{{orderProduct.product.name}}&quot;" height="100"
+              <img class="h-36 w-24 shadow rounded" ngSrc="{{cartProduct.product.url}}"
+                   alt="The preview image of product &quot;{{cartProduct.product.name}}&quot;" height="100"
                    width="200">
             </div>
             <!--  Product thumbnail end -->
             <!--  Product details start -->
             <div class="p-3">
-              <span>{{orderProduct.product.name}}</span>
+              <span>{{cartProduct.product.name}}</span>
             </div>
             <div class="p-3">
-              <span>${{orderProduct.product.price}}</span>
+              <span>${{cartProduct.product.price}}</span>
             </div>
             <div class="p-3">
-              <span>{{orderProduct.quantity}}</span>
+              <span>{{cartProduct.quantity}}</span>
             </div>
             <div class="p-3">
-              <fa-icon [icon]="faTrashCan"></fa-icon>
+              <fa-icon [icon]="faTrashCan" (click)="removeCartProduct(cartProduct)"></fa-icon>
             </div>
             <!--  Product details end -->
           </div>
           <!--  Cart total start  -->
           <div class="grid grid-cols-2 pt-6 border-t-2 justify-items-end">
             <span class="text-lg font-bold">Total</span>
-            <span class="text-lg">$9999</span>
+            <span class="text-lg">${{cart.getCartTotal()}}</span>
           </div>
           <!--  Cart total end  -->
         </div>
