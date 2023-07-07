@@ -9,7 +9,7 @@
       Your cart is empty :(
     </div>
     <div>
-      <button class="bg-gradient-to-br from-teal-600 to-teal-700 py-2 px-6 mt-8 text-white rounded-3xl" routerLink="/">
+      <button class="bg-gradient-to-br from-teal-500 to-teal-700 py-2 px-6 mt-8 text-white rounded-3xl" routerLink="/">
         Continue Shopping
       </button>
     </div>
@@ -73,27 +73,27 @@
         </div>
         <!--  Customer information form start -->
         <div class="px-1 mt-6">
-          <form (ngSubmit)="submitForm()" class="grid grid-cols-2">
+          <form #form="ngForm" (ngSubmit)="submitForm()" class="grid grid-cols-2">
             <div class="grid grid-cols-1 px-1 my-2">
               <label class="mb-1" for="first_name">First Name</label>
-              <input class="rounded p-1" placeholder="Jane" type="text" name="first_name" id="first_name" [(ngModel)]="customerInfo.firstName">
+              <input required minlength="2" maxlength="32"  class="rounded p-1" placeholder="Jane" type="text" name="first_name" id="first_name" [(ngModel)]="customerInfo.firstName">
             </div>
             <div class="grid grid-cols-1 px-1 my-2">
               <label class="mb-1" for="last_name">Last Name</label>
-              <input class="rounded p-1" placeholder="Roe" type="text" name="last_name" id="last_name" [(ngModel)]="customerInfo.lastName">
+              <input required minlength="2" maxlength="32"  class="rounded p-1" placeholder="Roe" type="text" name="last_name" id="last_name" [(ngModel)]="customerInfo.lastName">
             </div>
             <div class="grid grid-cols-1 px-1 my-2 col-span-2">
               <label class="mb-1" for="shipping_address">Shipping Address</label>
-              <input class="rounded p-1" placeholder="Planet Earth" type="text" name="shipping_address" id="shipping_address"
+              <input required minlength="2" maxlength="256"  class="rounded p-1" placeholder="Planet Earth" type="text" name="shipping_address" id="shipping_address"
                      [(ngModel)]="customerInfo.shippingAddress">
             </div>
             <div class="grid grid-cols-1 px-1 my-2 col-span-2">
               <label class="mb-1" for="credit_card_number">Credit Card Number</label>
-              <input class="rounded p-1" placeholder="0000 0000 0000 0000" type="text" name="credit_card_number" id="credit_card_number"
+              <input required minlength="16" maxlength="16" pattern="\d+" class="rounded p-1" placeholder="0000 0000 0000 0000" type="text" name="credit_card_number" id="credit_card_number"
                      [(ngModel)]="customerInfo.creditCardNumber">
             </div>
             <div class="col-span-2 text-right my-2">
-              <button class="bg-gradient-to-br from-teal-600 to-teal-700 py-2 px-6 text-white rounded-3xl" type="submit">Submit Order</button>
+              <button class="bg-gradient-to-br from-teal-500 to-teal-700 py-2 px-6 text-white rounded-3xl disabled:bg-gradient-to-br disabled:from-gray-500 disabled:to-gray-700" type="submit" [disabled]="form.invalid">Submit Order</button>
             </div>
           </form>
         </div>
