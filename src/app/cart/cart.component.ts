@@ -16,11 +16,10 @@ import {FormGroup, FormControl, Validators} from '@angular/forms';
 })
 export class CartComponent implements OnInit {
   cart: Cart = new Cart();
-  customerInformation: CustomerInformation = new CustomerInformation();
   customerInformationForm = new FormGroup({
     firstName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(32)]),
-    lastName: new FormControl('', [Validators.required,Validators.minLength(2), Validators.maxLength(32)]),
-    email: new FormControl('',[ Validators.required,Validators.email]),
+    lastName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(32)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     shippingAddress: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(256)]),
     creditCardNumber: new FormControl('', [Validators.required, Validators.pattern('\\d{16}')]),
   });
@@ -42,7 +41,7 @@ export class CartComponent implements OnInit {
     // Save the data to the service.
     this
       .customerInformationService
-      .setCustomerInformation(this.customerInformation);
+      .setCustomerInformation(<CustomerInformation>this.customerInformationForm.value); // Implicit casting.
     // Clear the cart.
     this
       .cartService

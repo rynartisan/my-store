@@ -82,32 +82,96 @@
             <div class="grid grid-cols-1 px-1 my-2">
               <label class="mb-1" for="first_name">First Name</label>
               <input class="rounded p-2 border" placeholder="Jane" type="text"
-                     name="first_name" id="first_name" [value]="customerInformation.firstName"
+                     name="first_name" id="first_name"
                      formControlName="firstName">
             </div>
             <div class="grid grid-cols-1 px-1 my-2">
               <label class="mb-1" for="last_name">Last Name</label>
               <input class="rounded p-2 border" placeholder="Roe" type="text"
-                     name="last_name" id="last_name" [value]="customerInformation.lastName" formControlName="lastName">
+                     name="last_name" id="last_name" formControlName="lastName">
+            </div>
+            <div class="px-1 my-2 col-span-2">
+              <div
+                *ngIf="customerInformationForm.controls.firstName.invalid && customerInformationForm.controls.firstName.touched">
+                <div class="text-red-500 text-xs mt-1" *ngIf="customerInformationForm.controls.firstName.errors?.['required']">First
+                  name
+                  is required.
+                </div>
+                <div class="text-red-500 text-xs mt-1" *ngIf="customerInformationForm.controls.firstName.errors?.['minlength']">Minimum
+                  length for first name is 2
+                  characters.
+                </div>
+                <div class="text-red-500 text-xs mt-1" *ngIf="customerInformationForm.controls.firstName.errors?.['maxLength']">Maximum
+                  length for first name is 32 characters.
+                </div>
+              </div>
+              <div
+                *ngIf="customerInformationForm.controls.lastName.invalid && customerInformationForm.controls.lastName.touched">
+                <div class="text-red-500 text-xs mt-1" *ngIf="customerInformationForm.controls.lastName.errors?.['required']">Last name
+                  is required.
+                </div>
+                <div class="text-red-500 text-xs mt-1" *ngIf="customerInformationForm.controls.lastName.errors?.['minlength']">Minimum
+                  length for last name is 2
+                  characters.
+                </div>
+                <div class="text-red-500 text-xs mt-1" *ngIf="customerInformationForm.controls.lastName.errors?.['maxLength']">Maximum
+                  length for last name is 32 characters.
+                </div>
+              </div>
             </div>
             <div class="grid grid-cols-1 px-1 my-2 col-span-2">
               <label class="mb-1" for="email">Email Address</label>
               <input class="rounded p-2 border"
                      placeholder="roe@example.com" type="email" name="email" id="email"
-                     [value]="customerInformation.email" formControlName="email">
+                     formControlName="email">
+              <div
+                *ngIf="customerInformationForm.controls.email.invalid && customerInformationForm.controls.email.touched">
+                <div class="text-red-500 text-xs mt-1" *ngIf="customerInformationForm.controls.email.errors?.['required']">Email
+                  is required.
+                </div>
+                <div class="text-red-500 text-xs mt-1" *ngIf="customerInformationForm.controls.email.errors?.['email']">
+                  You must enter a valid email in the form example@example.com.
+                </div>
+              </div>
             </div>
             <div class="grid grid-cols-1 px-1 my-2 col-span-2">
               <label class="mb-1" for="shipping_address">Shipping Address</label>
               <input class="rounded p-2 border" placeholder="Planet Earth"
                      type="text"
                      name="shipping_address" id="shipping_address"
-                     [value]="customerInformation.shippingAddress" formControlName="shippingAddress">
+                     formControlName="shippingAddress">
+              <div
+                *ngIf="customerInformationForm.controls.shippingAddress.invalid && customerInformationForm.controls.shippingAddress.touched">
+                <div class="text-red-500 text-xs mt-1" *ngIf="customerInformationForm.controls.shippingAddress.errors?.['required']">
+                  Shipping address
+                  is required.
+                </div>
+                <div class="text-red-500 text-xs mt-1" *ngIf="customerInformationForm.controls.shippingAddress.errors?.['minlength']">
+                  Minimum
+                  length for shipping address is 2
+                  characters.
+                </div>
+                <div class="text-red-500 text-xs mt-1" *ngIf="customerInformationForm.controls.shippingAddress.errors?.['maxLength']">
+                  Maximum
+                  length for shipping address is 32 characters.
+                </div>
+              </div>
             </div>
             <div class="grid grid-cols-1 px-1 my-2 col-span-2">
               <label class="mb-1" for="credit_card_number">Credit Card Number</label>
               <input class="rounded p-2 border"
                      placeholder="0000 0000 0000 0000" type="text" name="credit_card_number" id="credit_card_number"
-                     [value]="customerInformation.creditCardNumber" formControlName="creditCardNumber">
+                     formControlName="creditCardNumber">
+              <div
+                *ngIf="customerInformationForm.controls.creditCardNumber.invalid && customerInformationForm.controls.creditCardNumber.touched">
+                <div class="text-red-500 text-xs mt-1" *ngIf="customerInformationForm.controls.creditCardNumber.errors?.['required']">
+                  Credit card number
+                  is required.
+                </div>
+                <div class="text-red-500 text-xs mt-1" *ngIf="customerInformationForm.controls.creditCardNumber.errors?.['pattern']">
+                  You must enter a 16 digit valid credit card number in the format of 0000 0000 0000 0000.
+                </div>
+              </div>
             </div>
             <div class="col-span-2 text-right my-2">
               <button
@@ -116,74 +180,6 @@
               </button>
             </div>
           </form>
-          <!--  Error messages list start -->
-          <div class="mt-4" *ngIf="anyFieldIsTouchedAndInvalid()">
-            <div class="text-lg">
-              Please correct the following fields to submit your order:
-            </div>
-            <div
-              *ngIf="customerInformationForm.controls.firstName.invalid && customerInformationForm.controls.firstName.touched">
-              <div class="list-item" *ngIf="customerInformationForm.controls.firstName.errors?.['required']">First name
-                is required.
-              </div>
-              <div class="list-item" *ngIf="customerInformationForm.controls.firstName.errors?.['minlength']">Minimum
-                length for first name is 2
-                characters.
-              </div>
-              <div class="list-item" *ngIf="customerInformationForm.controls.firstName.errors?.['maxLength']">Maximum
-                length for first name is 32 characters.
-              </div>
-            </div>
-            <div
-              *ngIf="customerInformationForm.controls.lastName.invalid && customerInformationForm.controls.lastName.touched">
-              <div class="list-item" *ngIf="customerInformationForm.controls.lastName.errors?.['required']">Last name
-                is required.
-              </div>
-              <div class="list-item" *ngIf="customerInformationForm.controls.lastName.errors?.['minlength']">Minimum
-                length for last name is 2
-                characters.
-              </div>
-              <div class="list-item" *ngIf="customerInformationForm.controls.lastName.errors?.['maxLength']">Maximum
-                length for last name is 32 characters.
-              </div>
-            </div>
-            <div
-              *ngIf="customerInformationForm.controls.email.invalid && customerInformationForm.controls.email.touched">
-              <div class="list-item" *ngIf="customerInformationForm.controls.email.errors?.['required']">Email
-                is required.
-              </div>
-              <div class="list-item" *ngIf="customerInformationForm.controls.email.errors?.['email']">
-                You must enter a valid email in the form example@example.com.
-              </div>
-            </div>
-            <div
-              *ngIf="customerInformationForm.controls.shippingAddress.invalid && customerInformationForm.controls.shippingAddress.touched">
-              <div class="list-item" *ngIf="customerInformationForm.controls.shippingAddress.errors?.['required']">
-                Shipping address
-                is required.
-              </div>
-              <div class="list-item" *ngIf="customerInformationForm.controls.shippingAddress.errors?.['minlength']">
-                Minimum
-                length for shipping address is 2
-                characters.
-              </div>
-              <div class="list-item" *ngIf="customerInformationForm.controls.shippingAddress.errors?.['maxLength']">
-                Maximum
-                length for shipping address is 32 characters.
-              </div>
-            </div>
-            <div
-              *ngIf="customerInformationForm.controls.creditCardNumber.invalid && customerInformationForm.controls.creditCardNumber.touched">
-              <div class="list-item" *ngIf="customerInformationForm.controls.creditCardNumber.errors?.['required']">
-                Credit card number
-                is required.
-              </div>
-              <div class="list-item" *ngIf="customerInformationForm.controls.creditCardNumber.errors?.['pattern']">
-                You must enter a 16 digit valid credit card number in the format of 0000 0000 0000 0000.
-              </div>
-            </div>
-          </div>
-          <!--  Error messages list end -->
         </div>
         <!--  Customer information form end -->
       </div>
