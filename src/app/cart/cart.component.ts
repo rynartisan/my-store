@@ -34,7 +34,6 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeCartProducts();
-    this.addDummyProduct();
   }
 
   submitForm(): void {
@@ -70,15 +69,6 @@ export class CartComponent implements OnInit {
       const formControl = this.customerInformationForm.get(key);
       return formControl?.touched && formControl?.invalid;
     });
-  }
-
-  private addDummyProduct() {
-    this
-      .productService
-      .getProducts()
-      .subscribe(value => {
-        this.cartService.addCartProduct({product: value[0], quantity: 2});
-      });
   }
 
   private initializeCartProducts(): void {
