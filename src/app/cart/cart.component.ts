@@ -3,6 +3,7 @@ import {CartProduct} from "../model/cart.product";
 import {CartService} from "../service/cart.service";
 import {faMinus, faPlus, faShoppingCart, faTrashCan} from "@fortawesome/free-solid-svg-icons";
 import {Cart} from "../model/cart";
+import {ProductService} from "../service/product.service";
 
 @Component({
   selector: 'app-cart',
@@ -17,11 +18,21 @@ export class CartComponent implements OnInit {
   protected readonly faMinus = faMinus;
   protected readonly faPlus = faPlus;
 
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartService, private productService: ProductService) {
   }
 
   ngOnInit(): void {
     this.initializeCartProducts();
+    this.addDummyProduct();
+  }
+
+  private addDummyProduct() {
+    this
+      .productService
+      .getProducts()
+      .subscribe(value => {
+        this.cartService.addCartProduct({product: value[0], quantity: 2});
+      });
   }
 
   submitForm(): void {
