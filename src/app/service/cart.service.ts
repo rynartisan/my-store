@@ -77,4 +77,10 @@ export class CartService {
         .next(cart);
     }
   }
+
+  clearCart(): void {
+    this
+      .behaviorSubject
+      .next(new Cart());
+  }
 }
