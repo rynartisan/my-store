@@ -9,6 +9,7 @@ import {map, Observable} from "rxjs";
 export class ProductService {
 
   private url = '/assets/data.json';
+
   constructor(private http: HttpClient) {
   }
 

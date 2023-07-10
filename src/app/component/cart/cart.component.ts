@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router'
-import {CartProduct} from "../model/cart.product";
-import {CartService} from "../service/cart.service";
+import {CartProduct} from "../../model/cart.product";
+import {CartService} from "../../service/cart.service";
 import {faMinus, faPlus, faShoppingCart, faTrashCan} from "@fortawesome/free-solid-svg-icons";
-import {Cart} from "../model/cart";
-import {ProductService} from "../service/product.service";
-import {CustomerInformation} from "./customer-Information";
-import {CustomerInformationService} from "../service/customer-information.service";
-import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {Cart} from "../../model/cart";
+import {ProductService} from "../../service/product.service";
+import {CustomerInformation} from "../../model/customer-Information";
+import {CustomerInformationService} from "../../service/customer-information.service";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-cart',

@@ -5,8 +5,8 @@
     <!--    Product image start -->
     <div class="flex justify-end">
       <!--suppress AngularNgOptimizedImage -->
-      <img class="rounded-sm shadow" src="{{product.url}}"
-           alt="The preview image of product &quot;{{product.name}}&quot;" height="473" width="315">
+      <img alt="The preview image of product &quot;{{product.name}}&quot;" class="rounded-sm shadow"
+           height="473" src="{{product.url}}" width="315">
     </div>
     <!--    Product image end -->
     <!--    Product name and description start -->
@@ -19,15 +19,15 @@
 
       <div class="flex justify-start mt-8">
         <div>
-          <select class="w-20 rounded-lg text-center mx-3 my-3 border" [ngModel]="quantity"
-                  (ngModelChange)="onChangeSelection($event)">
+          <select (ngModelChange)="onChangeSelection($event)" [ngModel]="quantity"
+                  class="w-20 rounded-lg text-center mx-3 my-3 border">
             <option *ngFor="let q of quantities" [value]="q">{{q}}</option>
           </select>
         </div>
         <div class="">
           <button
-            class="text-teal-900 text-sm bg-white rounded-full border border-teal-900 mx-1 p-3 w-56 active:text-white active:bg-teal-900"
-            (click)="addToCart()">
+            (click)="addToCart()"
+            class="text-teal-900 text-sm bg-white rounded-full border border-teal-900 mx-1 p-3 w-56 active:text-white active:bg-teal-900">
             <fa-icon [icon]="buttonIcon"></fa-icon>
             {{buttonLabel}}
           </button>
@@ -42,10 +42,10 @@
     <div class="text-xl">Other products you might like:</div>
     <div class="grid grid-cols-4 px-10 py-4 gap-3">
       <!--  Product image display start -->
-      <div class="items-center" *ngFor="let randomProduct of randomProducts">
+      <div *ngFor="let randomProduct of randomProducts" class="items-center">
         <a [routerLink]="['/item',randomProduct.id]">
-          <img class="h-48 w-full object-cover object-center rounded shadow" ngSrc="{{randomProduct.url}}"
-               alt="The preview image of product &quot;{{randomProduct.name}}&quot;" height="1" width="1">
+          <img alt="The preview image of product &quot;{{randomProduct.name}}&quot;" class="h-48 w-full object-cover object-center rounded shadow"
+               height="1" ngSrc="{{randomProduct.url}}" width="1">
         </a>
         <div class="text-xs text-gray-800 text-center mt-4 font-bold">{{randomProduct.name}}</div>
       </div>

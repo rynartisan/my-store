@@ -1,8 +1,8 @@
 import {Component, Input} from '@angular/core';
-import {Product} from "../model/product";
+import {Product} from "../../model/product";
 import {faCheckCircle, faShoppingCart} from "@fortawesome/free-solid-svg-icons";
-import {CartService} from "../service/cart.service";
-import {CartProduct} from "../model/cart.product";
+import {CartService} from "../../service/cart.service";
+import {CartProduct} from "../../model/cart.product";
 import {IconDefinition} from "@fortawesome/free-regular-svg-icons";
 
 @Component({

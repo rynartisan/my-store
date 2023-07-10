@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {CustomerInformationService} from "../service/customer-information.service";
-import {CustomerInformation} from "../cart/customer-Information";
+import {CustomerInformationService} from "../../service/customer-information.service";
+import {CustomerInformation} from "../../model/customer-Information";
 import {faBoxOpen} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
@@ -11,6 +11,7 @@ import {faBoxOpen} from "@fortawesome/free-solid-svg-icons";
 export class ConfirmationComponent implements OnInit {
   customerInformation: CustomerInformation = new CustomerInformation();
   protected readonly faBoxOpen = faBoxOpen;
+
   constructor(private customerInformationService: CustomerInformationService) {
   }
 

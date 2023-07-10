@@ -1,12 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Product} from "../model/product";
+import {Product} from "../../model/product";
 import {ActivatedRoute} from "@angular/router";
 import {faCheckCircle, faShoppingCart} from "@fortawesome/free-solid-svg-icons";
 import {IconDefinition} from "@fortawesome/free-regular-svg-icons";
-import {ProductService} from "../service/product.service";
+import {ProductService} from "../../service/product.service";
 import {shuffle} from "lodash"
-import {CartService} from "../service/cart.service";
-import {CartProduct} from "../model/cart.product";
+import {CartService} from "../../service/cart.service";
+import {CartProduct} from "../../model/cart.product";
 
 @Component({
   selector: 'app-product-item-detail',
