@@ -1,10 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Product} from "../model/product";
 import {ActivatedRoute} from "@angular/router";
-import {faShoppingCart} from "@fortawesome/free-solid-svg-icons";
+import {faCheckCircle, faShoppingCart} from "@fortawesome/free-solid-svg-icons";
 import {IconDefinition} from "@fortawesome/free-regular-svg-icons";
 import {ProductService} from "../service/product.service";
 import {shuffle} from "lodash"
+import {CartService} from "../service/cart.service";
+import {CartProduct} from "../model/cart.product";
 
 @Component({
   selector: 'app-product-item-detail',
@@ -12,41 +14,53 @@ import {shuffle} from "lodash"
   styleUrls: ['./product-item-detail.component.css']
 })
 export class ProductItemDetailComponent implements OnInit {
-  @Input() id!: number;
+  @Input() id!: string;
   product: Product = {description: "", id: 0, name: "", price: 0, url: ""};
   buttonIcon: IconDefinition = faShoppingCart;
   buttonLabel: string = 'Add to cart';
   quantity: number = 1;
   quantities: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  private products: Product[] = [];
+  randomProducts: Product[] = [];
 
-  constructor(private activatedRoute: ActivatedRoute, private productService: ProductService) {
+  constructor(private activatedRoute: ActivatedRoute, private productService: ProductService, private cartService: CartService) {
   }
 
-  addToCart() {
-
+  addToCart(): void {
+    // Create the CartProductObject.
+    const cartProduct: CartProduct = {product: this.product, quantity: this.quantity};
+    // Send the product to the service.
+    this.cartService.addCartProduct(cartProduct);
+    // Reset the quantity to original.
+    this.quantity = 1;
+    // Change the button label.
+    this.buttonLabel = 'Added to Cart!';
+    // Change the icon
+    this.buttonIcon = faCheckCircle;
   }
 
   onChangeSelection($event: any) {
-    console.log($event)
+    this.quantity = parseInt($event);
   }
 
   ngOnInit(): void {
     this.initializeMainProduct();
+    this.initializeRandomProducts(parseInt(this.id));
+    this.buttonLabel = 'Add to cart';
+    this.buttonIcon = faShoppingCart;
+  }
+
+  private initializeRandomProducts(id: number) {
     this
       .productService
       .getProducts()
       .subscribe(value => {
-        this.products = value
-      })
-  }
-
-  getRandomProducts(id: number): Product[] {
-    return shuffle(this.products).filter(value => value.id !== id).slice(0, 4);
+        this.randomProducts = shuffle(value)
+          .filter(value => value.id !== id) // Remove the current element.
+          .slice(0, 4); // Take only the first four.
+      });
   }
 
   private initializeMainProduct() {
-    console.log(`id -> ${this.id}`)
     this
       .activatedRoute
       .data
