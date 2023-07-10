@@ -10,6 +10,7 @@ import { ProductService } from '../../service/product.service';
 import { shuffle } from 'lodash';
 import { CartService } from '../../service/cart.service';
 import { CartProduct } from '../../model/cart.product';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-item-detail',
@@ -29,6 +30,7 @@ export class ProductItemDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
     private cartService: CartService,
+    private toastrService: ToastrService,
   ) {}
 
   addToCart(): void {
@@ -45,6 +47,8 @@ export class ProductItemDetailComponent implements OnInit {
     this.buttonLabel = 'Added to Cart!';
     // Change the icon
     this.buttonIcon = faCheckCircle;
+    // Inform the user via toast.
+    this.toastrService.success(`Product is added to the cart!`);
   }
 
   onChangeSelection($event: any) {
@@ -66,9 +70,9 @@ export class ProductItemDetailComponent implements OnInit {
     });
   }
 
-  private initializeMainProduct() {
-    this.activatedRoute.data.subscribe(
-      ({ product }) => (this.product = product),
-    );
+  private initializeMainProduct(): void {
+    this.productService
+      .findProduct(parseInt(this.id))
+      .subscribe((value) => (this.product = value));
   }
 }

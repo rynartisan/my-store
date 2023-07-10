@@ -21,8 +21,8 @@ export class ProductService {
       map((products) => {
         const product = products.find((product) => product.id === id);
         if (product === undefined)
-          throw new Error(`Invalid product`);
-        return product
+          throw new Error('Cannot find product with that ID');
+        return product;
       }),
     );
   }

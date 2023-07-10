@@ -13,6 +13,7 @@ import { ProductService } from '../../service/product.service';
 import { CustomerInformation } from '../../model/customer-Information';
 import { CustomerInformationService } from '../../service/customer-information.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cart',
@@ -47,13 +48,12 @@ export class CartComponent implements OnInit {
   protected readonly faTrashCan = faTrashCan;
   protected readonly faMinus = faMinus;
   protected readonly faPlus = faPlus;
-  protected readonly JSON = JSON;
-
   constructor(
     private cartService: CartService,
     private productService: ProductService,
     private customerInformationService: CustomerInformationService,
     private router: Router,
+    private toastrService: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -67,6 +67,8 @@ export class CartComponent implements OnInit {
     ); // Implicit casting.
     // Clear the cart.
     this.cartService.clearCart();
+    // Display notification
+    this.toastrService.success('Your order was completed!');
     // Navigate to the confirmation page.
     // noinspection JSIgnoredPromiseFromCall
     this.router.navigate(['/checkout']);
@@ -74,22 +76,14 @@ export class CartComponent implements OnInit {
 
   removeCartProduct(cartProduct: CartProduct): void {
     this.cartService.removeCartProduct(cartProduct);
+    this.toastrService.warning(`Product was deleted from your cart!`);
   }
 
   updateQuantity(cartProduct: CartProduct, quantity: number): void {
     cartProduct.quantity += quantity;
-    if (cartProduct.quantity === 0)
-      this.cartService.removeCartProduct(cartProduct);
+    if (cartProduct.quantity === 0) this.removeCartProduct(cartProduct);
     else this.cartService.updateCartProduct(cartProduct);
   }
-
-  anyFieldIsTouchedAndInvalid(): boolean {
-    return Object.keys(this.customerInformationForm.controls).some((key) => {
-      const formControl = this.customerInformationForm.get(key);
-      return formControl?.touched && formControl?.invalid;
-    });
-  }
-
   private initializeCartProducts(): void {
     this.cartService.getCart().subscribe((value) => (this.cart = value));
   }

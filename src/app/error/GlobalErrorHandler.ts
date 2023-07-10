@@ -1,14 +1,22 @@
-import { ErrorHandler, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { ErrorHandler, Inject, Injectable, Injector } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GlobalErrorHandler implements ErrorHandler {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    @Inject(Injector) private readonly injector: Injector,
+  ) {}
 
-  handleError(error: Error) {
-    console.error(`Caught an error with message -> ${error.message}`);
+  private get toast() {
+    return this.injector.get(ToastrService);
+  }
+
+  handleError(error: Error): void {
+    this.toast.error(error.message); // This prints the whole stack trace, I have no idea why.
     // noinspection JSIgnoredPromiseFromCall
     this.router.navigate(['/']);
   }

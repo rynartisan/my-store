@@ -7,6 +7,7 @@ import {
 import { CartService } from '../../service/cart.service';
 import { CartProduct } from '../../model/cart.product';
 import { IconDefinition } from '@fortawesome/free-regular-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-item',
@@ -26,7 +27,10 @@ export class ProductItemComponent {
   buttonLabel: string = 'Add to Cart';
   buttonIcon: IconDefinition = faShoppingCart;
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private toastrService: ToastrService,
+  ) {}
 
   addToCart(): void {
     // Create the CartProductObject.
@@ -42,6 +46,8 @@ export class ProductItemComponent {
     this.buttonLabel = 'Added to Cart!';
     // Change the icon
     this.buttonIcon = faCheckCircle;
+    // Show message.
+    this.toastrService.success(`Product is added to the cart!`);
   }
 
   /**
