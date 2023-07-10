@@ -1,1 +1,36 @@
-<p>product-item-detail works!</p>
+<!--  Product item detail start -->
+<div class="grid grid-cols-1">
+  <!--  Main product detail start -->
+  <div class="grid grid-cols-2" *ngIf="product">
+    <!--    Product image start -->
+    <div class="">
+      <img class="" ngSrc="{{product.url}}"
+           alt="The preview image of product &quot;{{product.name}}&quot;" height="100" width="200">
+    </div>
+    <!--    Product image end -->
+    <!--    Product name and description start -->
+    <div class="p-1">
+      <div class="text-2xl mt-4 font-bold">{{product.name}}</div>
+      <div class="text-lg">${{product.price}}</div>
+      <div class="grid grid-cols-4">
+        <div>
+          <select class="w-20 rounded-lg text-center mx-3 my-3 border" [ngModel]="quantity"
+                  (ngModelChange)="onChangeSelection($event)">
+            <option *ngFor="let q of quantities" [value]="q">{{q}}</option>
+          </select>
+        </div>
+        <div class="col-span-3">
+          <button
+            class="text-teal-900 text-sm bg-white rounded-full border border-teal-900 mx-1 p-3 w-56 active:text-white active:bg-teal-900"
+            (click)="addToCart()">
+            <fa-icon [icon]="buttonIcon"></fa-icon>
+            {{buttonLabel}}
+          </button>
+        </div>
+      </div>
+    </div>
+    <!--    Product name and description end -->
+  </div>
+  <!--  Main product detail end -->
+</div>
+<!--  Product item detail end -->

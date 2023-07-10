@@ -1,17 +1,22 @@
 <!--  Product start -->
 <div class="border shadow-md m-1 rounded-xl overflow-hidden bg-white relative">
-  <img class="w-full h-96 object-cover" ngSrc="{{product.url}}"
-       alt="The preview image of product &quot;{{product.name}}&quot;" height="100" width="200">
+  <a [routerLink]="['item',product.id]">
+    <img class="w-full h-96 object-cover" ngSrc="{{product.url}}"
+         alt="The preview image of product &quot;{{product.name}}&quot;" height="100" width="200">
+  </a>
   <div class="mx-6 mt-14 mb-10 grid grid-cols-2">
     <div>
       <div class=" text-2xl font-bold uppercase">{{product.name}}</div>
       <div class="text-gray-500">{{product.description}}</div>
     </div>
     <div class="flex justify-end">
-      <select class="w-20 rounded-lg text-center mx-3 my-3 border" [ngModel]="quantity" (ngModelChange)="onChangeSelection($event)">
+      <select class="w-20 rounded-lg text-center mx-3 my-3 border" [ngModel]="quantity"
+              (ngModelChange)="onChangeSelection($event)">
         <option *ngFor="let q of quantities" [value]="q">{{q}}</option>
       </select>
-      <button class="text-teal-900 text-sm bg-white rounded-full border border-teal-900 mx-1 p-3 w-56 active:text-white active:bg-teal-900" (click)="addToCart()">
+      <button
+        class="text-teal-900 text-sm bg-white rounded-full border border-teal-900 mx-1 p-3 w-56 active:text-white active:bg-teal-900"
+        (click)="addToCart()">
         <fa-icon [icon]="buttonIcon"></fa-icon>
         {{buttonLabel}}
       </button>
