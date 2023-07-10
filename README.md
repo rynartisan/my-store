@@ -1,5 +1,7 @@
 # MyStore
 
+## About
+This is a project for my udacity course for learning angular framework.
 ## How to run
 ### 1. Install Dependencies
 Run the command `npm install`
