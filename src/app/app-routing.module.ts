@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import {
   provideRouter,
   RouterModule,
@@ -10,6 +10,7 @@ import { ConfirmationComponent } from './component/confirmation/confirmation.com
 import { ProductListComponent } from './component/product-list/product-list.component';
 import { ProductItemDetailComponent } from './component/product-item-detail/product-item-detail.component';
 import { productResolver } from './resolver/product.resolver';
+import { GlobalErrorHandler } from './error/GlobalErrorHandler';
 
 const routes: Routes = [
   { path: '', component: ProductListComponent },
@@ -25,6 +26,12 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [provideRouter(routes, withComponentInputBinding())],
+  providers: [
+    provideRouter(routes, withComponentInputBinding()),
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandler,
+    },
+  ],
 })
 export class AppRoutingModule {}

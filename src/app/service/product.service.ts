@@ -18,7 +18,12 @@ export class ProductService {
   //TODO: handle error.
   findProduct(id: number): Observable<Product> {
     return this.getProducts().pipe(
-      map((products) => products.find((product) => product.id === id)!),
+      map((products) => {
+        const product = products.find((product) => product.id === id);
+        if (product === undefined)
+          throw new Error(`Invalid product`);
+        return product
+      }),
     );
   }
 }
