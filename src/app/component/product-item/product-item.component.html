@@ -1,29 +1,29 @@
 <!--  Product start -->
-<div class="border shadow-md m-1 rounded-xl overflow-hidden bg-white relative">
+<div class='border shadow-md m-1 rounded-xl overflow-hidden bg-white relative'>
   <a [routerLink]="['item',product.id]">
-    <img alt="The preview image of product &quot;{{product.name}}&quot;" class="w-full h-96 object-cover"
-         height="100" ngSrc="{{product.url}}" width="200">
+    <img alt='The preview image of product &quot;{{product.name}}&quot;' class='w-full h-96 object-cover'
+         height='100' ngSrc='{{product.url}}' width='200'>
   </a>
-  <div class="mx-6 mt-14 mb-10 grid grid-cols-2">
+  <div class='mx-6 mt-14 mb-10 grid grid-cols-2'>
     <div>
-      <div class=" text-2xl font-bold uppercase">{{product.name}}</div>
-      <div class="text-gray-500">{{product.description}}</div>
+      <div class=' text-2xl font-bold uppercase'>{{product.name}}</div>
+      <div class='text-gray-500'>{{product.description}}</div>
     </div>
-    <div class="flex justify-end">
-      <select (ngModelChange)="onChangeSelection($event)" [ngModel]="quantity"
-              class="w-20 rounded-lg text-center mx-3 my-3 border">
-        <option *ngFor="let q of quantities" [value]="q">{{q}}</option>
+    <div class='flex justify-end'>
+      <select (ngModelChange)='onChangeSelection($event)' [ngModel]='quantity'
+              class='w-20 rounded-lg text-center mx-3 my-3 border'>
+        <option *ngFor='let q of quantities' [value]='q'>{{q}}</option>
       </select>
       <button
-        (click)="addToCart()"
-        class="text-teal-900 text-sm bg-white rounded-full border border-teal-900 mx-1 p-3 w-56 active:text-white active:bg-teal-900">
-        <fa-icon [icon]="buttonIcon"></fa-icon>
+        (click)='addToCart()'
+        class='text-teal-900 text-sm bg-white rounded-full border border-teal-900 mx-1 p-3 w-56 active:text-white active:bg-teal-900'>
+        <fa-icon [icon]='buttonIcon'></fa-icon>
         {{buttonLabel}}
       </button>
     </div>
   </div>
   <div
-    class="bg-gradient-to-br from-teal-600 to-teal-900 text-white text-2xl font-light rounded-md p-4 absolute bottom-28 mx-10 hover:brightness-110">
+    class='bg-gradient-to-br from-teal-600 to-teal-900 text-white text-2xl font-light rounded-md p-4 absolute bottom-28 mx-10 hover:brightness-110'>
     <span>${{product.price}}</span>
   </div>
 </div>

@@ -1,34 +1,34 @@
 <!--  Product item detail start -->
-<div class="grid grid-cols-1 mx-48 py-2 mt-12">
+<div class='grid grid-cols-1 mx-48 py-2 mt-12'>
   <!--  Main product detail start -->
-  <div class="grid grid-cols-3">
+  <div class='grid grid-cols-3'>
     <!--    Product image start -->
-    <div class="flex justify-end">
+    <div class='flex justify-end'>
       <!--suppress AngularNgOptimizedImage -->
-      <img alt="The preview image of product &quot;{{product.name}}&quot;" class="rounded-sm shadow"
-           height="473" src="{{product.url}}" width="315">
+      <img alt='The preview image of product &quot;{{product.name}}&quot;' class='rounded-sm shadow'
+           height='473' src='{{product.url}}' width='315'>
     </div>
     <!--    Product image end -->
     <!--    Product name and description start -->
-    <div class="col-span-2 flex flex-col justify-around gap-48 px-10 pt-10">
+    <div class='col-span-2 flex flex-col justify-around gap-48 px-10 pt-10'>
       <div>
-        <div class="text-4xl mt-4 font-bold">{{product.name}}</div>
-        <div class="text-lg text-gray-700">{{product.description}}</div>
-        <div class="text-3xl mt-8">${{product.price}}</div>
+        <div class='text-4xl mt-4 font-bold'>{{product.name}}</div>
+        <div class='text-lg text-gray-700'>{{product.description}}</div>
+        <div class='text-3xl mt-8'>${{product.price}}</div>
       </div>
 
-      <div class="flex justify-start mt-8">
+      <div class='flex justify-start mt-8'>
         <div>
-          <select (ngModelChange)="onChangeSelection($event)" [ngModel]="quantity"
-                  class="w-20 rounded-lg text-center mx-3 my-3 border">
-            <option *ngFor="let q of quantities" [value]="q">{{q}}</option>
+          <select (ngModelChange)='onChangeSelection($event)' [ngModel]='quantity'
+                  class='w-20 rounded-lg text-center mx-3 my-3 border'>
+            <option *ngFor='let q of quantities' [value]='q'>{{q}}</option>
           </select>
         </div>
-        <div class="">
+        <div class=''>
           <button
-            (click)="addToCart()"
-            class="text-teal-900 text-sm bg-white rounded-full border border-teal-900 mx-1 p-3 w-56 active:text-white active:bg-teal-900">
-            <fa-icon [icon]="buttonIcon"></fa-icon>
+            (click)='addToCart()'
+            class='text-teal-900 text-sm bg-white rounded-full border border-teal-900 mx-1 p-3 w-56 active:text-white active:bg-teal-900'>
+            <fa-icon [icon]='buttonIcon'></fa-icon>
             {{buttonLabel}}
           </button>
         </div>
@@ -38,16 +38,17 @@
   </div>
   <!--  Main product detail end -->
   <!--  Additional products section start -->
-  <div class="mt-8 px-36">
-    <div class="text-xl">Other products you might like:</div>
-    <div class="grid grid-cols-4 px-10 py-4 gap-3">
+  <div class='mt-8 px-36'>
+    <div class='text-xl'>Other products you might like:</div>
+    <div class='grid grid-cols-4 px-10 py-4 gap-3'>
       <!--  Product image display start -->
-      <div *ngFor="let randomProduct of randomProducts" class="items-center">
+      <div *ngFor='let randomProduct of randomProducts' class='items-center'>
         <a [routerLink]="['/item',randomProduct.id]">
-          <img alt="The preview image of product &quot;{{randomProduct.name}}&quot;" class="h-48 w-full object-cover object-center rounded shadow"
-               height="1" ngSrc="{{randomProduct.url}}" width="1">
+          <img alt='The preview image of product &quot;{{randomProduct.name}}&quot;'
+               class='h-48 w-full object-cover object-center rounded shadow'
+               height='1' ngSrc='{{randomProduct.url}}' width='1'>
         </a>
-        <div class="text-xs text-gray-800 text-center mt-4 font-bold">{{randomProduct.name}}</div>
+        <div class='text-xs text-gray-800 text-center mt-4 font-bold'>{{randomProduct.name}}</div>
       </div>
       <!--  Product image display end -->
     </div>

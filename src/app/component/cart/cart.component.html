@@ -1,70 +1,71 @@
 <!--  Cart component start  -->
-<div class="px-80 py-2">
+<div class='px-80 py-2'>
   <!--  Empty cart message start  -->
-  <div *ngIf="cart.isEmpty()" class="grid grid-cols-1 justify-items-center mt-72">
-    <div class="">
-      <fa-icon [icon]="faShoppingCart" class="text-9xl"></fa-icon>
+  <div *ngIf='cart.isEmpty()' class='grid grid-cols-1 justify-items-center mt-72'>
+    <div class=''>
+      <fa-icon [icon]='faShoppingCart' class='text-9xl'></fa-icon>
     </div>
-    <div class="text-2xl mt-4 text-gray-600">
+    <div class='text-2xl mt-4 text-gray-600'>
       Your cart is empty :(
     </div>
-    <div class="text-lg">
+    <div class='text-lg'>
       You can take a look at our product list, something is bound to catch your 👀!
     </div>
     <div>
-      <button class="bg-gradient-to-br from-teal-500 to-teal-700 py-2 px-6 mt-8 text-white rounded-3xl" routerLink="/">
+      <button class='bg-gradient-to-br from-teal-500 to-teal-700 py-2 px-6 mt-8 text-white rounded-3xl' routerLink='/'>
         Continue Shopping
       </button>
     </div>
   </div>
   <!--  Empty cart message end  -->
   <!--  Non-empty cart component start  -->
-  <div *ngIf="!cart.isEmpty()" class="mt-12">
-    <div class="grid grid-cols-5">
+  <div *ngIf='!cart.isEmpty()' class='mt-12'>
+    <div class='grid grid-cols-5'>
       <!--  Cart product list start  -->
-      <div class="col-span-3">
+      <div class='col-span-3'>
         <!--  Component title start  -->
-        <div class="text-4xl uppercase">
+        <div class='text-4xl uppercase'>
           <span>My Cart</span>
         </div>
         <!--  Component title end  -->
         <!--  Product table start -->
-        <div class="mt-6">
-          <div class="grid grid-cols-5 mb-2">
+        <div class='mt-6'>
+          <div class='grid grid-cols-5 mb-2'>
             <span></span>
-            <span class="px-3">Name</span>
-            <span class="px-3">Price</span>
-            <span class="px-3 col-span-2">Quantity</span>
+            <span class='px-3'>Name</span>
+            <span class='px-3'>Price</span>
+            <span class='px-3 col-span-2'>Quantity</span>
           </div>
-          <div *ngFor="let cartProduct of cart.cartProducts" class="grid grid-cols-5 rounded border-t-2 py-3">
+          <div *ngFor='let cartProduct of cart.cartProducts' class='grid grid-cols-5 rounded border-t-2 py-3'>
             <!--  Product thumbnail start -->
             <div>
-              <img alt="The preview image of product &quot;{{cartProduct.product.name}}&quot;" class="h-36 w-24 shadow rounded"
-                   height="100" ngSrc="{{cartProduct.product.url}}"
-                   width="200">
+              <img alt='The preview image of product &quot;{{cartProduct.product.name}}&quot;'
+                   class='h-36 w-24 shadow rounded'
+                   height='100' ngSrc='{{cartProduct.product.url}}'
+                   width='200'>
             </div>
             <!--  Product thumbnail end -->
             <!--  Product details start -->
-            <div class="p-3">
+            <div class='p-3'>
               <span>{{cartProduct.product.name}}</span>
             </div>
-            <div class="p-3">
+            <div class='p-3'>
               <span>${{cartProduct.product.price}}</span>
             </div>
-            <div class="grid grid-cols-3 p-3">
-              <fa-icon (click)="updateQuantity(cartProduct,-1)" [icon]="faMinus"></fa-icon>
+            <div class='grid grid-cols-3 p-3'>
+              <fa-icon (click)='updateQuantity(cartProduct,-1)' [icon]='faMinus'></fa-icon>
               <span>{{cartProduct.quantity}}</span>
-              <fa-icon (click)="updateQuantity(cartProduct,1)" [icon]="faPlus"></fa-icon>
+              <fa-icon (click)='updateQuantity(cartProduct,1)' [icon]='faPlus'></fa-icon>
             </div>
-            <div class="p-3">
-              <fa-icon (click)="removeCartProduct(cartProduct)" [icon]="faTrashCan"></fa-icon>
+            <div class='p-3'>
+              <fa-icon (click)='removeCartProduct(cartProduct)' [icon]='faTrashCan'></fa-icon>
             </div>
             <!--  Product details end -->
           </div>
           <!--  Cart total start  -->
-          <div class="grid grid-cols-2 pt-6 border-t-2 justify-items-end">
-            <span class="text-lg font-bold">Total</span>
-            <span class="text-lg">${{cart.getCartTotal()}}</span>
+          <div class='grid grid-cols-2 pt-6 border-t-2 justify-items-end'>
+            <span class='text-lg font-bold'>Total</span>
+            <span class='text-lg'>${{cart.getCartTotal()}}</span>
           </div>
           <!--  Cart total end  -->
         </div>
@@ -72,123 +73,125 @@
       </div>
       <!--  Cart product list end  -->
       <!--  Customer info section start  -->
-      <div class="col-span-2 ml-4">
-        <div class="text-4xl uppercase">
+      <div class='col-span-2 ml-4'>
+        <div class='text-4xl uppercase'>
           <span>Customer Info</span>
         </div>
         <!--  Customer information form start -->
-        <div class="px-1 mt-6">
-          <form (ngSubmit)="submitForm()" [formGroup]="customerInformationForm" class="grid grid-cols-2">
-            <div class="grid grid-cols-1 px-1 my-2">
-              <label class="mb-1" for="first_name">First Name</label>
-              <input class="rounded p-2 border" formControlName="firstName" id="first_name"
-                     name="first_name" placeholder="Jane"
-                     type="text">
+        <div class='px-1 mt-6'>
+          <form (ngSubmit)='submitForm()' [formGroup]='customerInformationForm' class='grid grid-cols-2'>
+            <div class='grid grid-cols-1 px-1 my-2'>
+              <label class='mb-1' for='first_name'>First Name</label>
+              <input class='rounded p-2 border' formControlName='firstName' id='first_name'
+                     name='first_name' placeholder='Jane'
+                     type='text'>
             </div>
-            <div class="grid grid-cols-1 px-1 my-2">
-              <label class="mb-1" for="last_name">Last Name</label>
-              <input class="rounded p-2 border" formControlName="lastName" id="last_name"
-                     name="last_name" placeholder="Roe" type="text">
+            <div class='grid grid-cols-1 px-1 my-2'>
+              <label class='mb-1' for='last_name'>Last Name</label>
+              <input class='rounded p-2 border' formControlName='lastName' id='last_name'
+                     name='last_name' placeholder='Roe' type='text'>
             </div>
-            <div class="px-1 my-2 col-span-2">
+            <div class='px-1 my-2 col-span-2'>
               <div
-                *ngIf="customerInformationForm.controls.firstName.invalid && customerInformationForm.controls.firstName.touched">
+                *ngIf='customerInformationForm.controls.firstName.invalid && customerInformationForm.controls.firstName.touched'>
                 <div *ngIf="customerInformationForm.controls.firstName.errors?.['required']"
-                     class="text-red-500 text-xs mt-1">First
+                     class='text-red-500 text-xs mt-1'>First
                   name
                   is required.
                 </div>
                 <div *ngIf="customerInformationForm.controls.firstName.errors?.['minlength']"
-                     class="text-red-500 text-xs mt-1">Minimum
+                     class='text-red-500 text-xs mt-1'>Minimum
                   length for first name is 2
                   characters.
                 </div>
                 <div *ngIf="customerInformationForm.controls.firstName.errors?.['maxLength']"
-                     class="text-red-500 text-xs mt-1">Maximum
+                     class='text-red-500 text-xs mt-1'>Maximum
                   length for first name is 32 characters.
                 </div>
               </div>
               <div
-                *ngIf="customerInformationForm.controls.lastName.invalid && customerInformationForm.controls.lastName.touched">
+                *ngIf='customerInformationForm.controls.lastName.invalid && customerInformationForm.controls.lastName.touched'>
                 <div *ngIf="customerInformationForm.controls.lastName.errors?.['required']"
-                     class="text-red-500 text-xs mt-1">Last name
+                     class='text-red-500 text-xs mt-1'>Last name
                   is required.
                 </div>
                 <div *ngIf="customerInformationForm.controls.lastName.errors?.['minlength']"
-                     class="text-red-500 text-xs mt-1">Minimum
+                     class='text-red-500 text-xs mt-1'>Minimum
                   length for last name is 2
                   characters.
                 </div>
                 <div *ngIf="customerInformationForm.controls.lastName.errors?.['maxLength']"
-                     class="text-red-500 text-xs mt-1">Maximum
+                     class='text-red-500 text-xs mt-1'>Maximum
                   length for last name is 32 characters.
                 </div>
               </div>
             </div>
-            <div class="grid grid-cols-1 px-1 my-2 col-span-2">
-              <label class="mb-1" for="email">Email Address</label>
-              <input class="rounded p-2 border"
-                     formControlName="email" id="email" name="email" placeholder="roe@example.com"
-                     type="email">
+            <div class='grid grid-cols-1 px-1 my-2 col-span-2'>
+              <label class='mb-1' for='email'>Email Address</label>
+              <input class='rounded p-2 border'
+                     formControlName='email' id='email' name='email' placeholder='roe@example.com'
+                     type='email'>
               <div
-                *ngIf="customerInformationForm.controls.email.invalid && customerInformationForm.controls.email.touched">
+                *ngIf='customerInformationForm.controls.email.invalid && customerInformationForm.controls.email.touched'>
                 <div *ngIf="customerInformationForm.controls.email.errors?.['required']"
-                     class="text-red-500 text-xs mt-1">Email
+                     class='text-red-500 text-xs mt-1'>Email
                   is required.
                 </div>
-                <div *ngIf="customerInformationForm.controls.email.errors?.['email']" class="text-red-500 text-xs mt-1">
+                <div *ngIf="customerInformationForm.controls.email.errors?.['email']" class='text-red-500 text-xs mt-1'>
                   You must enter a valid email in the form example@example.com.
                 </div>
               </div>
             </div>
-            <div class="grid grid-cols-1 px-1 my-2 col-span-2">
-              <label class="mb-1" for="shipping_address">Shipping Address</label>
-              <input class="rounded p-2 border" formControlName="shippingAddress"
-                     id="shipping_address"
-                     name="shipping_address" placeholder="Planet Earth"
-                     type="text">
+            <div class='grid grid-cols-1 px-1 my-2 col-span-2'>
+              <label class='mb-1' for='shipping_address'>Shipping Address</label>
+              <input class='rounded p-2 border' formControlName='shippingAddress'
+                     id='shipping_address'
+                     name='shipping_address' placeholder='Planet Earth'
+                     type='text'>
               <div
-                *ngIf="customerInformationForm.controls.shippingAddress.invalid && customerInformationForm.controls.shippingAddress.touched">
+                *ngIf='customerInformationForm.controls.shippingAddress.invalid && customerInformationForm.controls.shippingAddress.touched'>
                 <div *ngIf="customerInformationForm.controls.shippingAddress.errors?.['required']"
-                     class="text-red-500 text-xs mt-1">
+                     class='text-red-500 text-xs mt-1'>
                   Shipping address
                   is required.
                 </div>
                 <div *ngIf="customerInformationForm.controls.shippingAddress.errors?.['minlength']"
-                     class="text-red-500 text-xs mt-1">
+                     class='text-red-500 text-xs mt-1'>
                   Minimum
                   length for shipping address is 2
                   characters.
                 </div>
                 <div *ngIf="customerInformationForm.controls.shippingAddress.errors?.['maxLength']"
-                     class="text-red-500 text-xs mt-1">
+                     class='text-red-500 text-xs mt-1'>
                   Maximum
                   length for shipping address is 32 characters.
                 </div>
               </div>
             </div>
-            <div class="grid grid-cols-1 px-1 my-2 col-span-2">
-              <label class="mb-1" for="credit_card_number">Credit Card Number</label>
-              <input class="rounded p-2 border"
-                     formControlName="creditCardNumber" id="credit_card_number" name="credit_card_number" placeholder="0000 0000 0000 0000"
-                     type="text">
+            <div class='grid grid-cols-1 px-1 my-2 col-span-2'>
+              <label class='mb-1' for='credit_card_number'>Credit Card Number</label>
+              <input class='rounded p-2 border'
+                     formControlName='creditCardNumber' id='credit_card_number' name='credit_card_number'
+                     placeholder='0000 0000 0000 0000'
+                     type='text'>
               <div
-                *ngIf="customerInformationForm.controls.creditCardNumber.invalid && customerInformationForm.controls.creditCardNumber.touched">
+                *ngIf='customerInformationForm.controls.creditCardNumber.invalid && customerInformationForm.controls.creditCardNumber.touched'>
                 <div *ngIf="customerInformationForm.controls.creditCardNumber.errors?.['required']"
-                     class="text-red-500 text-xs mt-1">
+                     class='text-red-500 text-xs mt-1'>
                   Credit card number
                   is required.
                 </div>
                 <div *ngIf="customerInformationForm.controls.creditCardNumber.errors?.['pattern']"
-                     class="text-red-500 text-xs mt-1">
+                     class='text-red-500 text-xs mt-1'>
                   You must enter a 16 digit valid credit card number in the format of 0000 0000 0000 0000.
                 </div>
               </div>
             </div>
-            <div class="col-span-2 text-right my-2">
+            <div class='col-span-2 text-right my-2'>
               <button
-                [disabled]="customerInformationForm.invalid"
-                class="bg-gradient-to-br from-teal-500 to-teal-700 py-2 px-6 text-white rounded-3xl disabled:bg-gradient-to-br disabled:from-gray-500 disabled:to-gray-700" type="submit">Submit Order
+                [disabled]='customerInformationForm.invalid'
+                class='bg-gradient-to-br from-teal-500 to-teal-700 py-2 px-6 text-white rounded-3xl disabled:bg-gradient-to-br disabled:from-gray-500 disabled:to-gray-700'
+                type='submit'>Submit Order
               </button>
             </div>
           </form>
