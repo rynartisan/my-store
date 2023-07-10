@@ -1,25 +1,27 @@
 <!--  Product item detail start -->
-<div class="grid grid-cols-1">
+<div class="grid grid-cols-1 mx-48 py-2 mt-12">
   <!--  Main product detail start -->
-  <div class="grid grid-cols-2" *ngIf="product">
+  <div class="grid grid-cols-3">
     <!--    Product image start -->
-    <div class="">
-      <img class="" ngSrc="{{product.url}}"
-           alt="The preview image of product &quot;{{product.name}}&quot;" height="100" width="200">
+    <div class="flex justify-end">
+      <!--suppress AngularNgOptimizedImage -->
+      <img class="" src="{{product.url}}"
+           alt="The preview image of product &quot;{{product.name}}&quot;" height="630" width="420">
     </div>
     <!--    Product image end -->
     <!--    Product name and description start -->
-    <div class="p-1">
-      <div class="text-2xl mt-4 font-bold">{{product.name}}</div>
-      <div class="text-lg">${{product.price}}</div>
-      <div class="grid grid-cols-4">
+    <div class="col-span-2 px-10 pt-10">
+      <div class="text-4xl mt-4 font-bold">{{product.name}}</div>
+      <div class="text-lg text-gray-700">{{product.description}}</div>
+      <div class="text-3xl mt-8">${{product.price}}</div>
+      <div class="flex justify-start mt-8">
         <div>
           <select class="w-20 rounded-lg text-center mx-3 my-3 border" [ngModel]="quantity"
                   (ngModelChange)="onChangeSelection($event)">
             <option *ngFor="let q of quantities" [value]="q">{{q}}</option>
           </select>
         </div>
-        <div class="col-span-3">
+        <div class="">
           <button
             class="text-teal-900 text-sm bg-white rounded-full border border-teal-900 mx-1 p-3 w-56 active:text-white active:bg-teal-900"
             (click)="addToCart()">
@@ -32,5 +34,20 @@
     <!--    Product name and description end -->
   </div>
   <!--  Main product detail end -->
+  <!--  Additional products section start -->
+  <div class="">
+    <div>Other products you might like:</div>
+    <div class="grid grid-cols-4 px-10 py-4">
+      <!--  Product image display start -->
+      <div *ngFor="let randomProduct of getRandomProducts(product.id)">
+        <a [routerLink]="['/item',randomProduct.id]">
+          <img class="" ngSrc="{{randomProduct.url}}"
+               alt="The preview image of product &quot;{{randomProduct.name}}&quot;" height="630" width="420">
+        </a>
+      </div>
+      <!--  Product image display end -->
+    </div>
+  </div>
+  <!--  Additional products section end -->
 </div>
 <!--  Product item detail end -->
