@@ -14,6 +14,7 @@ import { CustomerInformation } from '../../model/customer-Information';
 import { CustomerInformationService } from '../../service/customer-information.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { CartProductAction } from '../../model/cart-product.action';
 
 @Component({
   selector: 'app-cart',
@@ -45,9 +46,7 @@ export class CartComponent implements OnInit {
     ]),
   });
   protected readonly faShoppingCart = faShoppingCart;
-  protected readonly faTrashCan = faTrashCan;
-  protected readonly faMinus = faMinus;
-  protected readonly faPlus = faPlus;
+
   constructor(
     private cartService: CartService,
     private productService: ProductService,
@@ -79,11 +78,19 @@ export class CartComponent implements OnInit {
     this.toastrService.warning(`Product was deleted from your cart!`);
   }
 
-  updateQuantity(cartProduct: CartProduct, quantity: number): void {
-    cartProduct.quantity += quantity;
-    if (cartProduct.quantity === 0) this.removeCartProduct(cartProduct);
-    else this.cartService.updateCartProduct(cartProduct);
+  updateCartProductQuantity($event: CartProductAction): void {
+    // Depending on the icon clicked, update the quantity.
+    if ($event.action === faTrashCan)
+      this.removeCartProduct($event.cartProduct);
+    else if ($event.action === faPlus) $event.cartProduct.quantity++;
+    else if ($event.action === faMinus) $event.cartProduct.quantity--;
+
+    // Execute the update.
+    if ($event.cartProduct.quantity === 0)
+      this.removeCartProduct($event.cartProduct);
+    else this.cartService.updateCartProduct($event.cartProduct);
   }
+
   private initializeCartProducts(): void {
     this.cartService.getCart().subscribe((value) => (this.cart = value));
   }

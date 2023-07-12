@@ -16,6 +16,7 @@ export class GlobalErrorHandler implements ErrorHandler {
   }
 
   handleError(error: Error): void {
+    console.error(error);
     this.toast.error(error.message); // This prints the whole stack trace, I have no idea why.
     // noinspection JSIgnoredPromiseFromCall
     this.router.navigate(['/']);
